@@ -118,6 +118,7 @@ public class RH_PlayerMovement : MonoBehaviour
         }
 
         HandleMovement();
+        RotateTowardsCamera();
 
     }
 
@@ -150,7 +151,7 @@ public class RH_PlayerMovement : MonoBehaviour
         }
 
         //... 
-        RotateTowardsCamera();
+        
         MoveCharacter(); 
         
 
@@ -241,7 +242,7 @@ public class RH_PlayerMovement : MonoBehaviour
         //Debug.Log("Target Direction " + targetDirection);
 
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection); 
-        _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation, _turnSpeed * Time.fixedDeltaTime));
+        _rigidbody.MoveRotation(Quaternion.Slerp(_rigidbody.rotation, targetRotation, _turnSpeed * Time.deltaTime));
 
         //_playerTransform.rotation = playerRotation;
     }
