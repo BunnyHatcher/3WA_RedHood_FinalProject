@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actionAnimation: WerehogAttack2
   _attackScore: 3
-  _recoveryTime: 2
+  _recoveryTime: 1
   maxAttackAngle: 35
   minAttackAngle: -35
   minAttackDistance: 0

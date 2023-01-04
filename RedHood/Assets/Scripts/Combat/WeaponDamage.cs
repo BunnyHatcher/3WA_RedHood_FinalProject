@@ -32,7 +32,8 @@ public class WeaponDamage : MonoBehaviour
 
     private void Awake()
     {
-        Player = GameObject.Find("Player");
+        //Player = GameObject.Find("Player");
+        Player = GameObject.Find("RH_V3");
     }
 
     //everytime the script gets enabled to deal damage, the list gets reset

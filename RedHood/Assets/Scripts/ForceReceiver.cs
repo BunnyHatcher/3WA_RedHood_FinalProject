@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class ForceReceiver : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
+    //[SerializeField] private CharacterController controller;
     [SerializeField] private NavMeshAgent agent;
     [SerializeField] private float drag = 0.1f;
 
@@ -19,11 +19,13 @@ public class ForceReceiver : MonoBehaviour
     private void Update()
     {
 
-    
-     // ------------GRAVITY-----------------------------------------------------------------------
-     
+
+        // ------------PHYSICS--------------------------------------------------------------------//
+
+        #region Fall Gravity (Not used)
+        /*
         // If we are not falling and are standing on the ground...
-        if(verticalVelocity < 0f && controller.isGrounded)
+        if (verticalVelocity < 0f && controller.isGrounded)
         {
             verticalVelocity = Physics.gravity.y * Time.deltaTime;
 
@@ -35,7 +37,10 @@ public class ForceReceiver : MonoBehaviour
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
 
         }
+        */
+        #endregion
 
+        #region Impact Force
 
         // calculates the slowing down of force over time
         impact = Vector3.SmoothDamp(impact, Vector3.zero, ref dampingVelocity, drag);
@@ -49,8 +54,12 @@ public class ForceReceiver : MonoBehaviour
                 agent.enabled = true; // ... then reenable the agent
             }
         }
+
+        #endregion
     }
 
+
+    #region Methods
     public void AddForce(Vector3 force)
     {
 
@@ -63,11 +72,18 @@ public class ForceReceiver : MonoBehaviour
         }
     }
 
+    #region Jumping (Not used)
+    
     public void Jump(float jumpForce)
     {
         verticalVelocity += jumpForce;
 
     }
+    
+    #endregion
+
+
+    #endregion
 
 
 }
