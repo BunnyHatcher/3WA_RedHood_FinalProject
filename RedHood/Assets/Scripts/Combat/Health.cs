@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
     {
         // at the start - don't forget to set the player's healt as well as his healthbar to max value
         healthValue = maxHealth;
-        playerHealthbar.SetMaxHealth(maxHealth);
+        //playerHealthbar.SetMaxHealth(maxHealth);
 
     }
 
@@ -69,6 +69,8 @@ public class Health : MonoBehaviour
 
         //playerHealthbar.SetHealth(healthValue);
 
+        Debug.Log("Enemy Health is" + healthValue);
+
         OnTakeDamage?.Invoke(); // invoke event when damage is dealt
 
         //Invoke Events when taking damage -  why not using the OnTakeDamage Invoke from above? Well, it seems like that is another kind of event, an Action, not a Unity event
@@ -87,7 +89,6 @@ public class Health : MonoBehaviour
 
         }
 
-        //Debug.Log(healthValue);
     }
 
     

@@ -6,28 +6,26 @@ using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour
 {
-    private int damage;
+    #region References
 
-    private float knockback;
-
+    [SerializeField]
+    private Collider myCollider; //get Player's collider    
+    private List<Collider> alreadyCollidedWith = new List<Collider>();// List where we store all the objects our weapon collided with
+    [HideInInspector]
+    public GameObject Player;    
+    public UnityEvent weaponHitEvent;
     //public GameObject bloodFX;
 
-    public GameObject Player;
+    #endregion
+
+    #region Bools & Ints
+
+    private int damage;
+    private float knockback;
+
+    #endregion
 
     
-    [SerializeField] private Collider myCollider; //get Player's collider
-
-    // List where we store all the objects our weapon collided with
-    private List<Collider> alreadyCollidedWith = new List<Collider>();
-
-    
-    //---------E V E N T S----------------------------------------------------------------------------------------
-
-    public UnityEvent weaponHitEvent;
-
-
-    //-----------------------------------------------------------------------------------------------------
-
 
 
     private void Awake()
@@ -36,27 +34,29 @@ public class WeaponDamage : MonoBehaviour
         Player = GameObject.Find("RH_V3");
     }
 
-    //everytime the script gets enabled to deal damage, the list gets reset
+
+    #region Methods
+
     private void OnEnable()
     {
+        //everytime the script gets enabled to deal damage,
+        //the list gets reset:
+        
         alreadyCollidedWith.Clear();//clears list
     }
-
-    
-    
-    
+        
     private void OnTriggerEnter(Collider other)
     {
         if (other == myCollider) { return; } // to prevent player from hurting himself with his own weapon
 
-        if (alreadyCollidedWith.Contains(other)){ return; }// if the object our weapon collides with is in the list already, do nothing
-
-        alreadyCollidedWith.Add(other);// adds object to list
+        if (alreadyCollidedWith.Contains(other)){ return; }// if the object our weapon collides with is in the list already, do nothing...
+        alreadyCollidedWith.Add(other);// ... otherwise: add object to list
 
         if(other.TryGetComponent<Health>(out Health health))
         {
             health.DealDamage(damage);
 
+            #region Raycast Hit (Not Used)
             /*
                 RaycastHit hit;
 
@@ -75,9 +75,10 @@ public class WeaponDamage : MonoBehaviour
 
             */
 
+            #endregion
+
             // Invoke Hit Event
             weaponHitEvent.Invoke();
-
         }
 
         // trigger knockback
@@ -91,10 +92,10 @@ public class WeaponDamage : MonoBehaviour
 
     public void SetAttack (int damage, float knockback)
     {
-
         this.damage = damage;
-        this.knockback = knockback;
-        
+        this.knockback = knockback;        
     }
+
+    #endregion
 
 }

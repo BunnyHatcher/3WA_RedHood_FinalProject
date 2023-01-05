@@ -15,7 +15,7 @@ public class PlayerHealth : Health
 
     }
 
-    public void DiminishHealthbar()
+    public void SetHealthbar()
     {
 
         playerHealthbar.SetHealth(healthValue);
