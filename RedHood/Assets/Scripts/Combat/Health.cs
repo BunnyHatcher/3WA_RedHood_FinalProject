@@ -10,19 +10,20 @@ public class Health : MonoBehaviour
 
     public int healthValue;
 
+    #region Getters / Setters
     //---------------GETTERS / SETTERS-----------------------------------------------------------
-    
+
     //Getter for healthValue
     public int GetHealthValue() { return healthValue; }
     
 
     // Setter for healthValue
     public void SetHealthValue(int value) { healthValue = value; }
-       
-    
+
+
     //---------------------------------------------------------------------------------------------
-    
-    
+    #endregion
+
     public PlayerHealthbar playerHealthbar;
 
     public bool isInvulnerable = false;
@@ -32,14 +33,13 @@ public class Health : MonoBehaviour
 
     public bool IsDead => healthValue == 0; //short way to check anywhere else if IsDead is true and returning if health is 0 
 
+    #region Events
     //---------E V E N T S----------------------------------------------------------------------------------------
 
     public UnityEvent damageTakenEvent;
-
     public UnityEvent whenKilledEvent;
-
-
     //-----------------------------------------------------------------------------------------------------
+    #endregion
 
 
     protected virtual void Start()
@@ -69,7 +69,7 @@ public class Health : MonoBehaviour
 
         //playerHealthbar.SetHealth(healthValue);
 
-        Debug.Log("Enemy Health is" + healthValue);
+        Debug.Log("Enemy Health : " + healthValue);
 
         OnTakeDamage?.Invoke(); // invoke event when damage is dealt
 
