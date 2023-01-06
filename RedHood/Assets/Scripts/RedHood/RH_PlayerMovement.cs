@@ -22,20 +22,27 @@ public class RH_PlayerMovement : MonoBehaviour
     public RH_AnimatorHandler _animatorManager;    
     public Animator _stateMachine;
 
-    //Scriptable Object
-    protected PlayerControlSettings _playerParameters;
+    #region Not Used
+    //Attacks & Combat
+    //[field: SerializeField] public Attack[] Attacks { get; private set; }
 
+    //Scriptable Object
+    //protected PlayerControlSettings _playerParameters;
+    #endregion
 
     // Input System
+    [HideInInspector]
     public Vector2 _movementInput;
+    [HideInInspector]
     public float _verticalInput;
+    [HideInInspector]
     public float _horizontalInput;
 
     //Movement Values
+    [Header("Movement")]
     public Vector3 _movementDirection = new Vector3();
     public float _currentSpeed;
     //public float _moveSpeed;
-
     public float _joggingSpeed = 300f;
     public float _runningSpeed = 500f;
     public float _turnSpeed = 500f;
@@ -44,6 +51,7 @@ public class RH_PlayerMovement : MonoBehaviour
     public float _jumpForce = 5f;
 
     //Combat
+    [Header("Combat")]
     [SerializeField]
     private GameObject _leftWeapon;
     [SerializeField]
@@ -59,16 +67,21 @@ public class RH_PlayerMovement : MonoBehaviour
 
 
     // BOOLS
+    [HideInInspector]
     public bool _isInteracting = false;
-
+    [HideInInspector]
     public bool _isJumping = false;
+    [HideInInspector]
     public bool _isGrounded = false;
+    [HideInInspector]
     public bool _isFalling = false;
+    [HideInInspector]
     public bool _forcesApplied = false;
-
+    [HideInInspector]
     public bool _isDodging = false;
-
-    public bool _isAttacking = false;    
+    [HideInInspector]
+    public bool _isAttacking = false;
+    [HideInInspector]
     public bool _weaponDrawn = false;
 
 
@@ -161,11 +174,7 @@ public class RH_PlayerMovement : MonoBehaviour
          */
         #endregion
 
-
-        //... 
-
         MoveCharacter(); 
-        
 
     }
 

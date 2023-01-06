@@ -34,7 +34,7 @@ public class RH_ATTACKING : RH_BaseState
 
         if (animator.GetCurrentAnimatorStateInfo(2).normalizedTime > 1)
         {
-            Debug.Log("Combo Ready");
+           //Debug.Log("Combo Ready");
         }
 
 

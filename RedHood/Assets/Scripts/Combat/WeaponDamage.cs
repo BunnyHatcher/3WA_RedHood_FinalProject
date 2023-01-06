@@ -20,7 +20,8 @@ public class WeaponDamage : MonoBehaviour
 
     #region Bools & Ints
     [SerializeField]
-    private int damage;
+    private int damage = 10;
+    [SerializeField]
     private float knockback;
 
     #endregion

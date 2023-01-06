@@ -71,7 +71,8 @@ public class RH_AnimatorHandler : MonoBehaviour
             _animator.SetBool("isGrounded", false);
 
             _animator.SetTrigger("JumpTrigger");
-            Debug.Log("Jump context started");
+            
+            //Debug.Log("Jump context started");
 
            /* if (_rigidbody.velocity.y < -0.2f && !_playerMovement._isGrounded)
             {
@@ -163,7 +164,7 @@ public class RH_AnimatorHandler : MonoBehaviour
         if (context.started)
         {
             _animator.SetTrigger("LightAttack");
-            Debug.Log("Light Attack is triggered");
+            //Debug.Log("Light Attack is triggered");
         }       
     }
 
@@ -172,7 +173,7 @@ public class RH_AnimatorHandler : MonoBehaviour
         if (context.started)
         {
             _animator.SetTrigger("HeavyAttack");
-            Debug.Log("Heavy Attack is triggered");
+            //Debug.Log("Heavy Attack is triggered");
         }
     }
 
