@@ -124,6 +124,8 @@ public class RH_PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        #region In Air vs Grounded
+
         // Set FallVelocity when in States of tag "InAir"
         if (_stateMachine.GetCurrentAnimatorStateInfo(1).IsTag("InAir")) // Determine current state through Animator Tag via AnimatorStateInfo
             
@@ -136,30 +138,35 @@ public class RH_PlayerMovement : MonoBehaviour
         {
             StickToGround();
         }
+        #endregion
 
-
+        #region Jumping
         if (_isJumping)
         {
             _movementDirection.y = _jumpForce;
             //Debug.Log("JumpForce applied");
             _isJumping = false; // to prevent changing to isJumping every frame after the first one: we want to jump only once
         }
+        #endregion
 
 
-        if (_stateMachine.GetCurrentAnimatorStateInfo(1).IsTag("Dodge"))
+        #region Attacking (NOT IN USE)
+        /*
+        if (_stateMachine.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
         {
-
+            //We change to root motion and make sure the player can't move while the root motion is playing
+            _stateMachine.applyRootMotion = true;
+            _stateMachine.SetFloat("moveSpeed", 0f); //... this means the player can't move instead the root motion takes over
         }
+         */
+        #endregion
+
 
         //... 
-        
+
         MoveCharacter(); 
         
 
-        if (_forcesApplied)
-        {
-
-        }
     }
 
 

@@ -11,8 +11,10 @@ public class CharacterEffectsManager : MonoBehaviour
     //use capital letter for naming functions
     //parameters inside a function start with a minuscule letter
 
-    [SerializeField]Health scriptHealth;
+    [SerializeField] protected Health scriptHealth;
+
     
+
     // REFACTORING ADVICE: WHY NOT USE ACCESS MODIFIER "PROTECTED"?
     [Header("WeaponFX")]
     public WeaponEffects WeaponFX;
@@ -36,7 +38,7 @@ public class CharacterEffectsManager : MonoBehaviour
 
     private void Awake()
     {
-        
+       
     }
 
     
@@ -74,7 +76,7 @@ public class CharacterEffectsManager : MonoBehaviour
     */
 
 
-    public void PlayBloodFX()
+    public virtual void PlayFX()
     {
         //Debug.Log("BloodFX played");
         

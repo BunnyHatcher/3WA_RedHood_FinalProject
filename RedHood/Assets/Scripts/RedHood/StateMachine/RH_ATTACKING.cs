@@ -16,7 +16,7 @@ public class RH_ATTACKING : RH_BaseState
     {
 
         //_playerMovement._isAttacking = true;
-
+  
         timePassed = 0f;
 
         //Set WeaponDrawn bool to true if not yet true
