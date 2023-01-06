@@ -126,6 +126,7 @@ public class RH_PlayerMovement : MonoBehaviour
     {
         // Set FallVelocity when in States of tag "InAir"
         if (_stateMachine.GetCurrentAnimatorStateInfo(1).IsTag("InAir")) // Determine current state through Animator Tag via AnimatorStateInfo
+            
         {
             SetFallVelocity();
             //Debug.Log("Player in Air, Velocity = " + _movementDirection.y);

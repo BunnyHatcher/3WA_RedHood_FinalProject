@@ -69,8 +69,9 @@ public class RH_AnimatorHandler : MonoBehaviour
         {
             _animator.SetBool("isJumping", true);
             _animator.SetBool("isGrounded", false);
-            Debug.Log("Jump context started");
 
+            _animator.SetTrigger("JumpTrigger");
+            Debug.Log("Jump context started");
 
            /* if (_rigidbody.velocity.y < -0.2f && !_playerMovement._isGrounded)
             {
