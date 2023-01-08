@@ -56,11 +56,17 @@ public class ForceReceiver : MonoBehaviour
         #endregion
     }
 
+    private void FixedUpdate()
+    {
+        GetComponent<Rigidbody>().AddForce(impact);
+        //Debug.Log("Impact: " + impact);
+    }
+
 
     #region Methods
     public void AddForce(Vector3 force)
     {
-
+        
         impact += force;
         
         // if script is used for AI --> disable NavMesh Agent so it doesn't interfere with knockback effect

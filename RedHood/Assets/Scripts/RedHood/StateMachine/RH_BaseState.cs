@@ -21,6 +21,7 @@ public abstract class RH_BaseState : StateMachineBehaviour
     protected RH_PhysicsHandler _physicsHandler;
     protected RH_AnimatorHandler _animatorHandler;
     protected Targeter _targeter;
+    protected WeaponDamage _weaponDamage;
 
 
     public Vector3 _movementDirection;
@@ -51,11 +52,15 @@ public abstract class RH_BaseState : StateMachineBehaviour
         _playerMovement = _playerGameObject.GetComponent<RH_PlayerMovement>();
         _animator = _playerGameObject.GetComponent<Animator>();
 
+        //_weaponDamage = FindObjectOfType<WeaponDamage>();
+
         //Get all Components in Children of RedHoodCharacter
         _floorDetector = _playerGameObject.GetComponentInChildren<FloorDetector>();
         _targeter = _playerGameObject.GetComponentInChildren<Targeter>();
         //Set up Camera
         //_cameraTransform = Camera.main.transform;
+
+        
     }
 
     

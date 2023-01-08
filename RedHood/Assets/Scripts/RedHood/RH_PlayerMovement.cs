@@ -57,8 +57,14 @@ public class RH_PlayerMovement : MonoBehaviour
 
     //Force Values
 
-    [field: SerializeField]  public float forceTime { get; private set; }
-    [field: SerializeField] public float force { get; private set; }
+    #region Attack Values
+    [field: SerializeField]  public float ForceTime { get; private set; }
+    [field: SerializeField] public float Force { get; private set; }
+
+    public int _playerDamage = 10;
+    public float _playerKnockback = 15;
+
+    #endregion
 
     private bool _alreadyAppliedForce;
 
@@ -173,7 +179,7 @@ public class RH_PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region Attacking
+        #region Attacking (NOT USED)
         /*
         if (_stateMachine.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
         {
@@ -188,7 +194,7 @@ public class RH_PlayerMovement : MonoBehaviour
 
         }
          */
-        
+
         #endregion
 
         MoveCharacter();
@@ -211,6 +217,7 @@ public class RH_PlayerMovement : MonoBehaviour
         RotateTowardsCamera();
     }
     */
+
     #region Receiving Input
     public void HandleMovementInput(InputAction.CallbackContext context)
     {
@@ -322,7 +329,7 @@ public class RH_PlayerMovement : MonoBehaviour
     {
         if (_alreadyAppliedForce) { return; }
 
-        _forceReceiver.AddForce(transform.forward * force);
+        _forceReceiver.AddForce(transform.forward * Force);
 
         _alreadyAppliedForce = true;
     }

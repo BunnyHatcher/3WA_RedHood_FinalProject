@@ -19,14 +19,13 @@ public class WeaponDamage : MonoBehaviour
     #endregion
 
     #region Bools & Ints
-    [SerializeField]
-    private int damage = 10;
-    [SerializeField]
-    private float knockback;
+    [field: SerializeField] public int Damage { get; private set; }
+
+    [field: SerializeField] public float Knockback { get; private set; }
 
     #endregion
 
-    
+
 
 
     private void Awake()
@@ -55,7 +54,7 @@ public class WeaponDamage : MonoBehaviour
 
         if(other.TryGetComponent<Health>(out Health health))
         {
-            health.DealDamage(damage);
+            health.DealDamage(Damage);
 
             #region Raycast Hit (Not Used)
             /*
@@ -86,15 +85,15 @@ public class WeaponDamage : MonoBehaviour
         if(other.TryGetComponent<ForceReceiver>(out ForceReceiver forceReceiver))
         {
             Vector3 direction = (other.transform.position - myCollider.transform.position).normalized; //calculate force direction by subtracting my own position from the position of the otehr object
-            forceReceiver.AddForce(direction * knockback); // fill in direction and multiply it with knockback force
-
+            //Debug.Log("Knockback: " + direction * Knockback);
+            forceReceiver.AddForce(direction * Knockback); // fill in direction and multiply it with knockback force
         }
     }
 
     public void SetAttack (int damage, float knockback)
     {
-        this.damage = damage;
-        this.knockback = knockback;        
+        this.Damage = damage;
+        this.Knockback = knockback;        
     }
 
     #endregion

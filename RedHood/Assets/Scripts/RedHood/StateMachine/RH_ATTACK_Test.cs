@@ -18,6 +18,8 @@ public class RH_ATTACK_Test : RH_BaseState
     {
 
         //_playerMovement._isAttacking = true;
+        
+        //Debug.Log("Enter ATTACKING");
   
         timePassed = 0f;
 
@@ -27,17 +29,18 @@ public class RH_ATTACK_Test : RH_BaseState
             _playerMovement._weaponDrawn = true;
         }
 
-        Debug.Log("Enter ATTACKING");
+        
+        //_weaponDamage.SetAttack(_playerMovement._playerDamage, _playerMovement._playerKnockback);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (animator.GetCurrentAnimatorStateInfo(2).normalizedTime > 1)
-        {
-           //Debug.Log("Combo Ready");
-        }
+        
+       //Debug.Log("Combo Ready");
+        
 
         _playerMovement.TryApplyForce();
 
