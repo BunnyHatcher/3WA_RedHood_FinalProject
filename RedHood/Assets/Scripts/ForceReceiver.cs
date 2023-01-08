@@ -66,14 +66,14 @@ public class ForceReceiver : MonoBehaviour
     #region Methods
     public void AddForce(Vector3 force)
     {
-        
-        impact += force;
-        
         // if script is used for AI --> disable NavMesh Agent so it doesn't interfere with knockback effect
         if(agent != null)
         {
             agent.enabled = false;
         }
+        
+        impact += force;
+        
     }
 
     #region Jumping (Not used)

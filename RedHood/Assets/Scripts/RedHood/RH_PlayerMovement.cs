@@ -61,8 +61,7 @@ public class RH_PlayerMovement : MonoBehaviour
     [field: SerializeField]  public float ForceTime { get; private set; }
     [field: SerializeField] public float Force { get; private set; }
 
-    public int _playerDamage = 10;
-    public float _playerKnockback = 15;
+    
 
     #endregion
 
