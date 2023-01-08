@@ -39,7 +39,7 @@ public class PlayerEffectsManager : CharacterEffectsManager
         // get bool isInvulnerable and use it to create if condition for shield block effects
         if (scriptHealth.isInvulnerable == true)
         {
-            Debug.Log("ShieldFX played");
+            //Debug.Log("ShieldFX played");
 
             //GameObject rig = GameObject.Find("mixamorig:Hips");
             GameObject shieldImpact = GameObject.Find("mixamorig:Shield_joint");

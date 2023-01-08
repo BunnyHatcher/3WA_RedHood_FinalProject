@@ -18,8 +18,6 @@ public class ForceReceiver : MonoBehaviour
 
     private void Update()
     {
-
-
         // ------------PHYSICS--------------------------------------------------------------------//
 
         #region Fall Gravity (Not used)

@@ -16,19 +16,13 @@ public class RH_PlayerMovement : MonoBehaviour
     //Physics Logic
     protected RH_PhysicsHandler _physicsHandler;
     protected FloorDetector _floorDetector;
+    protected ForceReceiver _forceReceiver;
     
     //Animations and StateMachine
     public string _currentState; // maybe work with State Tags? --> IsTag
     public RH_AnimatorHandler _animatorManager;    
     public Animator _stateMachine;
 
-    #region Not Used
-    //Attacks & Combat
-    //[field: SerializeField] public Attack[] Attacks { get; private set; }
-
-    //Scriptable Object
-    //protected PlayerControlSettings _playerParameters;
-    #endregion
 
     // Input System
     [HideInInspector]
@@ -50,7 +44,7 @@ public class RH_PlayerMovement : MonoBehaviour
     //Jumping
     public float _jumpForce = 5f;
 
-    //Combat
+    //Combat References
     [Header("Combat")]
     [SerializeField]
     private GameObject _leftWeapon;
@@ -60,7 +54,22 @@ public class RH_PlayerMovement : MonoBehaviour
     private GameObject _rightWeapon;
     [SerializeField]
     private GameObject _rightWeaponSlot;
-    
+
+    //Force Values
+
+    [field: SerializeField]  public float forceTime { get; private set; }
+    [field: SerializeField] public float force { get; private set; }
+
+    private bool _alreadyAppliedForce;
+
+    #region Not Used
+    //Attacks & Combat
+    //[field: SerializeField] public Attack[] Attacks { get; private set; }
+
+    //Scriptable Object
+    //protected PlayerControlSettings _playerParameters;
+    #endregion
+
     //Combos
     public int _comboStateIndex = -1;    
     public float _comboAttackTime;
@@ -103,6 +112,7 @@ public class RH_PlayerMovement : MonoBehaviour
         _playerGameObject = GameObject.Find("RH_V3");
         _rigidbody = GetComponent<Rigidbody>();
         _physicsHandler = GetComponent<RH_PhysicsHandler>();
+        _forceReceiver = GetComponent<ForceReceiver>();
         _animatorManager = GetComponent<RH_AnimatorHandler>();
         //_playerTransform = _playerGameObject.transform; --> not needed, we drag PlayerTransform on to the field
         
@@ -137,6 +147,7 @@ public class RH_PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        
         #region In Air vs Grounded
 
         // Set FallVelocity when in States of tag "InAir"
@@ -162,8 +173,7 @@ public class RH_PlayerMovement : MonoBehaviour
         }
         #endregion
 
-
-        #region Attacking (NOT IN USE)
+        #region Attacking
         /*
         if (_stateMachine.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
         {
@@ -171,10 +181,17 @@ public class RH_PlayerMovement : MonoBehaviour
             _stateMachine.applyRootMotion = true;
             _stateMachine.SetFloat("moveSpeed", 0f); //... this means the player can't move instead the root motion takes over
         }
+
+        if (_stateMachine.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
+        {
+            TryApplyForce();
+
+        }
          */
+        
         #endregion
 
-        MoveCharacter(); 
+        MoveCharacter();
 
     }
 
@@ -299,6 +316,49 @@ public class RH_PlayerMovement : MonoBehaviour
         //Destroy(_rightWeapon);
         _leftWeapon.SetActive(false);
         _rightWeapon.SetActive(false);
+    }
+
+    public void TryApplyForce()
+    {
+        if (_alreadyAppliedForce) { return; }
+
+        _forceReceiver.AddForce(transform.forward * force);
+
+        _alreadyAppliedForce = true;
+    }
+
+    #endregion
+
+    #region Combo Calculations
+
+    //Method to find out what state we are in when transitioning between states
+    private float GetNormalizedTime()
+    {
+        AnimatorStateInfo currentInfo = _stateMachine.GetCurrentAnimatorStateInfo(2);
+        AnimatorStateInfo nextInfo = _stateMachine.GetNextAnimatorStateInfo(2);
+
+        if (_stateMachine.IsInTransition(0) && nextInfo.IsTag("Attack")) //If we are in an attack transition...
+        {
+            return nextInfo.normalizedTime; //... tell us how far we are through with it
+        }
+        else if (!_stateMachine.IsInTransition(0) && currentInfo.IsTag("Attack")) //If we are in an attack & not in transition...
+        {
+            return currentInfo.normalizedTime; //... tell us how far we are through with it
+        }
+        else // Safe fail condition
+        {
+            return 0f;
+        }
+    }
+    private void TryComboAttack(float normalizedTime)
+    {
+        if (_comboStateIndex == -1) { return; }
+
+        if (normalizedTime < _comboAttackTime) { return; }
+
+        _stateMachine.SetBool("CanSwitchCombo", true);
+
+
     }
     #endregion
 
