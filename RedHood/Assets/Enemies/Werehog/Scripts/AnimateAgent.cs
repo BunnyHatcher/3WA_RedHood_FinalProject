@@ -98,6 +98,12 @@ public class AnimateAgent : MonoBehaviour
         _werehogStateMachine.SetBool("IMPACT", true);
     }
 
+    public void HandleEnemyDeath()
+    {
+        //_anim.SetTrigger("ImpactReceived");
+        _werehogStateMachine.SetBool("DEAD", true);
+    }
+
     #endregion
 
 }

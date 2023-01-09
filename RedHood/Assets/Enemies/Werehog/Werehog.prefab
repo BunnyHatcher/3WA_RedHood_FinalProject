@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemy: {fileID: 1103117260156789938}
+  _werehogStateMachine: {fileID: 1106248243405609899}
 --- !u!114 &1103117260156789931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +217,19 @@ MonoBehaviour:
         m_CallState: 2
   whenKilledEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1103117260156789929}
+        m_TargetAssemblyTypeName: AnimateAgent, Assembly-CSharp
+        m_MethodName: HandleEnemyDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1361762860
 MonoBehaviour:
   m_ObjectHideFlags: 0

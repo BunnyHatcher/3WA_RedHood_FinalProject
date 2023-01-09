@@ -188,6 +188,11 @@ public class RH_AnimatorHandler : MonoBehaviour
         _animator.SetBool("isKnockedBack", true);
     }
 
+    public void HandleDie()
+    {
+        _animator.SetBool("isDead", true);
+    }
+
     #endregion
 
 

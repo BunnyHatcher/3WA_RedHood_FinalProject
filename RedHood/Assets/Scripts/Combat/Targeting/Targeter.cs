@@ -2,6 +2,7 @@ using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 using UnityEngine;
 
 public class Targeter : MonoBehaviour
@@ -13,6 +14,8 @@ public class Targeter : MonoBehaviour
     public List<Target> targets = new List<Target>();
 
     public Target CurrentTarget { get; private set; }
+
+    public UnityEvent targetDestroyedEvent;
 
     private void Start()
     {
@@ -26,7 +29,7 @@ public class Targeter : MonoBehaviour
         if (other.TryGetComponent<Target>(out Target target))
         {
             targets.Add(target);
-            
+           
             target.OnDestroyed += RemoveTarget; // if target is destroyed: subscribe to RemoveTarget method 
         }
     }
@@ -102,7 +105,7 @@ public class Targeter : MonoBehaviour
     }
     
     //method to remove current target from list of targets
-    private void RemoveTarget(Target target)
+    public void RemoveTarget(Target target)
     {
         if(CurrentTarget == target)
         {

@@ -12,7 +12,7 @@ public abstract class BaseState : StateMachineBehaviour
     //private StateMachine _brain;
     protected GameObject _player;
     
-    protected GameObject _enemy;
+    public GameObject _enemy;
     protected Rigidbody _enemyRigidbody;
     protected MoveAgent _moveAgent;
     protected NavMeshAgent _navAgent;
@@ -20,6 +20,7 @@ public abstract class BaseState : StateMachineBehaviour
     protected Animator _animator;
     protected Animator _FSM;
     protected TMP_Text _stateNote;
+    protected Target _target;
 
     //Vision Cone
     protected VisionCone _visionCone;
@@ -52,13 +53,16 @@ public abstract class BaseState : StateMachineBehaviour
         
         _enemy = GameObject.Find("Werehog");
         _enemyRigidbody = _enemy.GetComponent<Rigidbody>();
+        _target = _enemy.GetComponent<Target>();
 
         // A.I.
         _navAgent = _enemy.GetComponent<NavMeshAgent>();
         _moveAgent = _enemy.GetComponent<MoveAgent>();
+
         // Animation
         _animator = _enemy.GetComponent<Animator>();
         _enemyAnimations = _enemy.GetComponent<AnimateAgent>();
+
         // State Machine
         _FSM = GameObject.Find("WerehogStateMachine").GetComponent<Animator>();
         _stateNote = _enemy.GetComponentInChildren<TMP_Text>();
@@ -143,12 +147,6 @@ public abstract class BaseState : StateMachineBehaviour
         _navAgent.transform.localPosition = Vector3.zero;
         _navAgent.transform.localRotation = Quaternion.identity;
     }
-
-
-
-
-
-
 
     #endregion
 
