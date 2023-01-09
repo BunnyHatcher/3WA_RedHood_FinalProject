@@ -7,7 +7,9 @@ public class Ragdoll : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
-    [SerializeField] private CharacterController controller;
+    //[SerializeField] private CharacterController controller;
+
+    [SerializeField] private RH_PlayerMovement playerController;
 
     private Collider[] allColliders;
 
@@ -44,7 +46,7 @@ public class Ragdoll : MonoBehaviour
 
         }
 
-        controller.enabled = !isRagdoll; // when Ragdoll is enabled, we can't controll the character anymore
+        //playerController.enabled = !isRagdoll; // when Ragdoll is enabled, we can't controll the character anymore
         animator.enabled = !isRagdoll; // when Ragdoll is enabled, the animator doesn't play anymore
 
     }

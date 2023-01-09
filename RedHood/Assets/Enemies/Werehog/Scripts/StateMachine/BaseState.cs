@@ -21,6 +21,7 @@ public abstract class BaseState : StateMachineBehaviour
     protected Animator _FSM;
     protected TMP_Text _stateNote;
     protected Target _target;
+    protected Ragdoll _ragdoll;
 
     //Vision Cone
     protected VisionCone _visionCone;
@@ -59,9 +60,10 @@ public abstract class BaseState : StateMachineBehaviour
         _navAgent = _enemy.GetComponent<NavMeshAgent>();
         _moveAgent = _enemy.GetComponent<MoveAgent>();
 
-        // Animation
+        // Animation & Ragdoll
         _animator = _enemy.GetComponent<Animator>();
         _enemyAnimations = _enemy.GetComponent<AnimateAgent>();
+        _ragdoll = _enemy.GetComponent<Ragdoll>();
 
         // State Machine
         _FSM = GameObject.Find("WerehogStateMachine").GetComponent<Animator>();

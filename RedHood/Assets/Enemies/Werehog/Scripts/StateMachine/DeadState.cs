@@ -8,7 +8,7 @@ public class DeadState : BaseState
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _stateNote.text = "Dead";
-        //stateMachine.Ragdoll.ToggleRagdoll(true); // toggle ragdoll
+        _ragdoll.ToggleRagdoll(true); // toggle ragdoll
         //stateMachine.Weapon.gameObject.SetActive(false); // make sure enemies' weapon is deactivated when they die
         GameObject.Destroy(_target);
 
