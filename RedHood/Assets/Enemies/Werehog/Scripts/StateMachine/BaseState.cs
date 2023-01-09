@@ -31,7 +31,7 @@ public abstract class BaseState : StateMachineBehaviour
     public float _distanceFromTarget = Mathf.Infinity;    
     
     // Chasing
-    protected float _endChaseDistance = 5.5f;
+    protected float _endChaseDistance = 10f;
     
     // Suspicion
     public float _timeSinceLastSawPlayer = Mathf.Infinity;

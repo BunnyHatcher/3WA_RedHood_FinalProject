@@ -28,13 +28,15 @@ public class Health : MonoBehaviour
 
     public bool isInvulnerable = false;
 
+    #region Action Events - Not used
     public event Action OnTakeDamage; //event to be invoked whenever player or enemy takes damage
     public event Action OnDie; // event to be invoked whenever player or enemy dies
+    #endregion
 
     public bool IsDead => healthValue == 0; //short way to check anywhere else if IsDead is true and returning if health is 0 
 
-    #region Events
-    //---------E V E N T S----------------------------------------------------------------------------------------
+    #region Unity Events
+    //---------U N I T Y - E V E N T S----------------------------------------------------------------------------------------
 
     public UnityEvent damageTakenEvent;
     public UnityEvent whenKilledEvent;
@@ -50,6 +52,9 @@ public class Health : MonoBehaviour
 
     }
 
+
+    #region Methods
+
     public void SetInvulnerable(bool isInvulnerable)
     {
         this.isInvulnerable = isInvulnerable;
@@ -58,12 +63,17 @@ public class Health : MonoBehaviour
 
     public void DealDamage(int damage)
     {
+        //If dead already, stop flogging a dead horse
         if(healthValue <= 0) { return; }
 
+        // If target is invulnerable, return
         if(isInvulnerable)  // cancel calculation if invulnerability is turned on
         {
             return;
         }
+
+        // Calculating health after damage
+        #region Taking Damage
 
         healthValue = Mathf.Max(healthValue - damage, 0); // returns either current healthValue value or 0 if it goes below 0
 
@@ -71,18 +81,18 @@ public class Health : MonoBehaviour
 
         Debug.Log("Enemy Health : " + healthValue);
 
-        OnTakeDamage?.Invoke(); // invoke event when damage is dealt
+        //OnTakeDamage?.Invoke(); // invoke event when damage is dealt
 
-        //Invoke Events when taking damage -  why not using the OnTakeDamage Invoke from above? Well, it seems like that is another kind of event, an Action, not a Unity event
+        //Invoke Events when taking damage
         damageTakenEvent.Invoke();
+        #endregion
 
-        
-        
-        
-        if(healthValue == 0)
+
+        // What happens when target dies?
+        if (healthValue == 0)
         {
 
-            OnDie?.Invoke(); // invoke event when death has taken his toll
+            //OnDie?.Invoke(); // invoke event when death has taken his toll
 
             //Invoke Unity Events on death
             whenKilledEvent.Invoke();
@@ -91,5 +101,7 @@ public class Health : MonoBehaviour
 
     }
 
-    
+    #endregion
+
+
 }

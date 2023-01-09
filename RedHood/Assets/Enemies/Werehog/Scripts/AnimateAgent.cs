@@ -14,6 +14,8 @@ public class AnimateAgent : MonoBehaviour
     Animator _anim;
     NavMeshAgent _navAgent;
     MoveAgent _moveAgent;
+    public Animator _werehogStateMachine;
+
     Vector2 _smoothDeltaPosition = Vector2.zero;
     Vector2 _velocity = Vector2.zero;
 
@@ -24,6 +26,7 @@ public class AnimateAgent : MonoBehaviour
         _anim = GetComponent<Animator>();
         _navAgent = GetComponent<NavMeshAgent>();
         _enemyRigidbody = GetComponent<Rigidbody>();
+        //_werehogStateMachine = GetComponentInChildren<Animator>();
     }
     void Start()
     {
@@ -87,6 +90,12 @@ public class AnimateAgent : MonoBehaviour
         _anim.SetBool("isInteracting", isInteracting);
         _anim.CrossFade(targetAnim, 0.2f);
 
+    }
+
+    public void HandleEnemyDamage()
+    {
+        _anim.SetTrigger("ImpactReceived");
+        _werehogStateMachine.SetBool("IMPACT", true);
     }
 
     #endregion

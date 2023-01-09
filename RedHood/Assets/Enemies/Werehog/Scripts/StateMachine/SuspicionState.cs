@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SuspicionState : BaseState
 {
+    bool _playerIsNear = false;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -17,10 +19,21 @@ public class SuspicionState : BaseState
     {
         _timeSinceLastSawPlayer += Time.deltaTime;
 
-        if(_timeSinceLastSawPlayer > _suspicionTime)
+        _playerIsNear = Vector3.Distance(_enemy.transform.position, _player.transform.position) < 5;
+
+        if (_playerIsNear)
         {
-            _FSM.SetBool("PATROLLING", true);
+            _FSM.SetBool("CHASING", true); 
         }
+
+        else
+        {
+            if (_timeSinceLastSawPlayer > _suspicionTime)
+            {
+                _FSM.SetBool("PATROLLING", true);
+            }
+        }
+        
 
     }
 

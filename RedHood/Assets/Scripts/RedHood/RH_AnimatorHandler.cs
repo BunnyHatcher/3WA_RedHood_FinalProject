@@ -179,6 +179,17 @@ public class RH_AnimatorHandler : MonoBehaviour
 
     #endregion
 
+    // EVENTS
+
+    #region Events
+
+    public void HandleTakeDamage()
+    {
+        _animator.SetBool("isKnockedBack", true);
+    }
+
+    #endregion
+
 
 
 }
