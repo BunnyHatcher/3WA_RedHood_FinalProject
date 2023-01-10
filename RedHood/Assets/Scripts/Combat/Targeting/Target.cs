@@ -7,7 +7,7 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public event Action<Target> OnDestroyed;
-    public UnityEvent targetDestroyedEvent;
+    //public UnityEvent targetDestroyedEvent;
 
     private void OnDestroy()
     {

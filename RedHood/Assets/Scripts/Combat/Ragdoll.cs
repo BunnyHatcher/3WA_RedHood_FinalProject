@@ -9,6 +9,8 @@ public class Ragdoll : MonoBehaviour
 
     //[SerializeField] private CharacterController controller;
 
+    [SerializeField] private Collider mainCollider;
+
     [SerializeField] private RH_PlayerMovement playerController;
 
     private Collider[] allColliders;
@@ -48,7 +50,7 @@ public class Ragdoll : MonoBehaviour
 
         //playerController.enabled = !isRagdoll; // when Ragdoll is enabled, we can't controll the character anymore
         animator.enabled = !isRagdoll; // when Ragdoll is enabled, the animator doesn't play anymore
-
+        mainCollider.enabled = !isRagdoll; // turn off main collider after death
     }
 
 

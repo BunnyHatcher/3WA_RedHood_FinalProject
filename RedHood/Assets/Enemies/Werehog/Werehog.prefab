@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1103117260156789930}
+  mainCollider: {fileID: 1103117260156789932}
   playerController: {fileID: 0}
 --- !u!82 &1361762870
 AudioSource:
