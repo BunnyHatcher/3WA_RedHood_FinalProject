@@ -188,8 +188,10 @@ public class RH_AnimatorHandler : MonoBehaviour
         _animator.SetBool("isKnockedBack", true);
     }
 
-    public void HandleDie()
+   
+    public void HandlePlayerDeath()
     {
+        //_anim.SetTrigger("ImpactReceived");
         _animator.SetBool("isDead", true);
     }
 

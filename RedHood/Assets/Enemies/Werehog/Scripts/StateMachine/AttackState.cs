@@ -11,6 +11,7 @@ public class AttackState : BaseState
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateEnter(animator, stateInfo, layerIndex);
         _stateNote.text = "Attacking";
         _navAgent.ResetPath();
     }

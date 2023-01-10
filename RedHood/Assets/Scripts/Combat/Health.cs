@@ -85,6 +85,7 @@ public class Health : MonoBehaviour
 
         //Invoke Events when taking damage
         damageTakenEvent.Invoke();
+
         #endregion
 
 

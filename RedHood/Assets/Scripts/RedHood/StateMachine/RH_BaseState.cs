@@ -22,6 +22,7 @@ public abstract class RH_BaseState : StateMachineBehaviour
     protected RH_AnimatorHandler _animatorHandler;
     protected Targeter _targeter;
     protected WeaponDamage _weaponDamage;
+    protected RH_Ragdoll _ragdoll;
 
 
     public Vector3 _movementDirection;
@@ -51,6 +52,7 @@ public abstract class RH_BaseState : StateMachineBehaviour
         _animatorHandler = _playerGameObject.GetComponent<RH_AnimatorHandler>();
         _playerMovement = _playerGameObject.GetComponent<RH_PlayerMovement>();
         _animator = _playerGameObject.GetComponent<Animator>();
+        _ragdoll = _playerGameObject.GetComponent<RH_Ragdoll>();
 
         //_weaponDamage = FindObjectOfType<WeaponDamage>();
 

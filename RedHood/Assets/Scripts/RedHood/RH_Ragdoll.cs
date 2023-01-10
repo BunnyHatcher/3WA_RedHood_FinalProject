@@ -13,7 +13,7 @@ public class RH_Ragdoll : MonoBehaviour
 
     [SerializeField] private RH_PlayerMovement playerController;
 
-    private Collider[] allColliders;
+    public Collider[] allColliders;
 
     private Rigidbody[] allRigidbodies;
 
@@ -33,7 +33,7 @@ public class RH_Ragdoll : MonoBehaviour
         {
             if (collider.gameObject.CompareTag("Ragdoll")) // if they have the tag Ragdoll...
             {
-                collider.enabled = isRagdoll;   // ... activate ragdoll for them
+                collider.isTrigger = !isRagdoll;               
             }
 
         }
@@ -48,9 +48,10 @@ public class RH_Ragdoll : MonoBehaviour
 
         }
 
-        //playerController.enabled = !isRagdoll; // when Ragdoll is enabled, we can't controll the character anymore
+        playerController.enabled = !isRagdoll; // when Ragdoll is enabled, we can't controll the character anymore
         animator.enabled = !isRagdoll; // when Ragdoll is enabled, the animator doesn't play anymore
         mainCollider.enabled = !isRagdoll; // turn off main collider after death
+        
     }
 
 

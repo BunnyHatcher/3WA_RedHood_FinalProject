@@ -47,12 +47,12 @@ public abstract class BaseState : StateMachineBehaviour
 
     #region Awake & Start
 
-    private void Awake()
+    private void Setup()
     {
         //_player = GameObject.Find("Player");
         _player = GameObject.FindWithTag("Player");
         
-        _enemy = GameObject.Find("Werehog");
+        //_enemy = GameObject.Find("Werehog");
         _enemyRigidbody = _enemy.GetComponent<Rigidbody>();
         _target = _enemy.GetComponent<Target>();
 
@@ -67,6 +67,7 @@ public abstract class BaseState : StateMachineBehaviour
 
         // State Machine
         _FSM = GameObject.Find("WerehogStateMachine").GetComponent<Animator>();
+        //_FSM = _enemy.GetComponentInChildren<Animator>();
         _stateNote = _enemy.GetComponentInChildren<TMP_Text>();
 
         _visionCone = _enemy.GetComponentInChildren<VisionCone>();
@@ -148,6 +149,12 @@ public abstract class BaseState : StateMachineBehaviour
 
         _navAgent.transform.localPosition = Vector3.zero;
         _navAgent.transform.localRotation = Quaternion.identity;
+    }
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        _enemy = animator.gameObject.transform.parent.gameObject;
+        Setup();
     }
 
     #endregion

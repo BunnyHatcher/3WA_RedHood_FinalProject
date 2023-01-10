@@ -5,19 +5,20 @@ using UnityEngine;
 public class RH_IMPACT : RH_BaseState
 {
 
-    private float _impactDuration = 1;
+    private float _impactDuration = 1f;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        Debug.Log("Entered Impact State");
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         _impactDuration -= Time.deltaTime;
+        Debug.Log("impact duration = " + _impactDuration);
 
         if(_impactDuration <= 0f)
         {
