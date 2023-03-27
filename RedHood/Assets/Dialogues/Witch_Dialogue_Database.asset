@@ -54,13 +54,13 @@ MonoBehaviour:
       type: 2
       typeString: CustomFieldType_Boolean
     portrait: {fileID: 0}
-    spritePortrait: {fileID: 0}
+    spritePortrait: {fileID: 21300000, guid: 2baf58e432fd5d44aae58dc12c9496b3, type: 3}
     alternatePortraits: []
     spritePortraits: []
   - id: 2
     fields:
     - title: Name
-      value: NPC
+      value: Witch
       type: 0
       typeString: 
     - title: Pictures
@@ -75,8 +75,12 @@ MonoBehaviour:
       value: False
       type: 2
       typeString: CustomFieldType_Boolean
+    - title: Display Name
+      value: Wise Woman
+      type: 0
+      typeString: 
     portrait: {fileID: 0}
-    spritePortrait: {fileID: 0}
+    spritePortrait: {fileID: 21300000, guid: b175c59fa3ce5c345a8d3c45efaba4e7, type: 3}
     alternatePortraits: []
     spritePortraits: []
   items: []
@@ -91,7 +95,7 @@ MonoBehaviour:
     - title: Initial Value
       value: 
       type: 0
-      typeString: 
+      typeString: CustomFieldType_Text
     - title: Description
       value: 
       type: 0
@@ -194,8 +198,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 20
+        x: 260
+        y: 26
         width: 160
         height: 30
     - id: 1
@@ -249,8 +253,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 40
-        y: 93
+        x: 258
+        y: 103
         width: 160
         height: 30
     - id: 2
@@ -298,13 +302,13 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 61
-        y: 186
+        x: 261
+        y: 194
         width: 160
         height: 30
     entryGroups: []
     canvasScrollPosition: {x: 0, y: 0}
-    canvasZoom: 1
+    canvasZoom: 0.9100001
   - id: 2
     fields:
     - title: Title
@@ -1325,7 +1329,7 @@ MonoBehaviour:
       isGroup: 0
       nodeColor: 
       delaySimStatus: 0
-      falseConditionAction: 
+      falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks:
       - originConversationID: 8
@@ -1341,8 +1345,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 20
+        x: 253
+        y: 37
         width: 160
         height: 30
     - id: 1
@@ -1394,8 +1398,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 30
-        y: 70
+        x: 251
+        y: 178
         width: 160
         height: 30
     entryGroups: []
