@@ -87,6 +87,50 @@ MonoBehaviour:
     spritePortrait: {fileID: 21300000, guid: b175c59fa3ce5c345a8d3c45efaba4e7, type: 3}
     alternatePortraits: []
     spritePortraits: []
+  - id: 3
+    fields:
+    - title: Name
+      value: Dwarf
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 21300000, guid: 0a8dd7861f7293142b2f0a8df5d0b1c8, type: 3}
+    alternatePortraits: []
+    spritePortraits: []
+  - id: 4
+    fields:
+    - title: Name
+      value: Blacksmith
+      type: 0
+      typeString: 
+    - title: Pictures
+      value: '[]'
+      type: 3
+      typeString: CustomFieldType_Files
+    - title: Description
+      value: 
+      type: 0
+      typeString: 
+    - title: IsPlayer
+      value: False
+      type: 2
+      typeString: CustomFieldType_Boolean
+    portrait: {fileID: 0}
+    spritePortrait: {fileID: 21300000, guid: e6f5383d18fe7a945b25e876ac782cc1, type: 3}
+    alternatePortraits: []
+    spritePortraits: []
   items: []
   locations: []
   variables:
@@ -216,8 +260,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 260
-        y: 26
+        x: 20
+        y: 55
         width: 160
         height: 30
     - id: 1
@@ -272,8 +316,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 258
-        y: 103
+        x: 200
+        y: 55
         width: 160
         height: 30
     - id: 2
@@ -334,8 +378,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 265.95255
-        y: 392.25388
+        x: 920
+        y: 55
         width: 160
         height: 30
     - id: 3
@@ -390,8 +434,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 393.4945
-        y: 265.08792
+        x: 560
+        y: 30
         width: 160
         height: 30
     - id: 4
@@ -453,8 +497,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 265.69232
-        y: 162.67325
+        x: 380
+        y: 55
         width: 160
         height: 30
     - id: 5
@@ -509,8 +553,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 159.09895
-        y: 267.8352
+        x: 560
+        y: 80
         width: 160
         height: 30
     - id: 6
@@ -564,8 +608,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 272.3288
-        y: 329.4246
+        x: 740
+        y: 55
         width: 160
         height: 30
     - id: 7
@@ -614,8 +658,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 451.7721
-        y: 448.94748
+        x: 1100
+        y: 30
         width: 160
         height: 30
     - id: 8
@@ -657,18 +701,18 @@ MonoBehaviour:
       conditionPriority: 2
       outgoingLinks: []
       conditionsString: 
-      userScript: 
+      userScript: Variable["MentionedCreatures"] = false
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 190.37976
-        y: 529.16437
+        x: 1100
+        y: 80
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 0, y: 292.40497}
+    canvasScrollPosition: {x: 0, y: 5.063263}
     canvasZoom: 0.7900002
   - id: 2
     fields:
@@ -1721,7 +1765,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Actor
-        value: 2
+        value: 3
         type: 5
         typeString: CustomFieldType_Actor
       - title: Conversant
