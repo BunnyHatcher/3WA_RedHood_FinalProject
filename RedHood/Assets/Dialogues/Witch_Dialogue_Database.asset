@@ -498,14 +498,16 @@ MonoBehaviour:
         isConnector: 0
         priority: 2
       conditionsString: 
-      userScript: Variable["MentionedCreatures"] = true
+      userScript: 'Variable["MentionedCreatures"] = true;
+
+'
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 880.25305
-        y: 19.873428
+        x: 818.06494
+        y: 16.075958
         width: 160
         height: 30
     - id: 4
@@ -615,8 +617,8 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 875.18976
-        y: 135.6962
+        x: 820.75934
+        y: 129.3671
         width: 160
         height: 30
     - id: 6
@@ -713,8 +715,8 @@ MonoBehaviour:
       falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks: []
-      conditionsString: 
-      userScript: Variable["MentionedCreatures"] = true
+      conditionsString: Variable["MentionedCreatures"] == true
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
@@ -762,14 +764,14 @@ MonoBehaviour:
       falseConditionAction: Block
       conditionPriority: 2
       outgoingLinks: []
-      conditionsString: 
-      userScript: Variable["MentionedCreatures"] = false
+      conditionsString: Variable["MentionedCreatures"] == false
+      userScript: 
       onExecute:
         m_PersistentCalls:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 1406.329
+        x: 1407.5948
         y: 159.74681
         width: 160
         height: 30
@@ -836,8 +838,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 339.24048, y: 0}
-    canvasZoom: 0.7900002
+    canvasScrollPosition: {x: 381.42844, y: 0}
+    canvasZoom: 0.7000003
   - id: 2
     fields:
     - title: Title
