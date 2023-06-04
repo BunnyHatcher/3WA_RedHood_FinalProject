@@ -28,7 +28,7 @@ public class RH_DODGING : RH_BaseState
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _animator.SetBool("isDodging", true);
+        _animator.SetBool("isDodging", false);
         _playerMovement._isInteracting = false;
         _animator.applyRootMotion = false;
     }

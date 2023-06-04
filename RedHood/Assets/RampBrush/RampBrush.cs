@@ -104,8 +104,8 @@ public class RampBrush : MonoBehaviour {
 	
 	
 	public int[] terrainCordsToBitmap(TerrainData terData, Vector3 v){
-			float Tw = (float) terData.heightmapWidth;
-			float Th = (float) terData.heightmapHeight;
+			float Tw = (float) terData.heightmapResolution;
+			float Th = (float) terData.heightmapResolution;
 			Vector3 Ts = terData.size;
 			int ny = (int) Mathf.Floor((Tw / Ts.x) * v.x);
 		    int nx = (int) Mathf.Floor((Th / Ts.z) * v.z);
@@ -117,8 +117,8 @@ public class RampBrush : MonoBehaviour {
 	}
 	
 	public float[] bitmapCordsToTerrain(TerrainData terData, int x, int y){
-			int Tw = terData.heightmapWidth;
-			int Th = terData.heightmapHeight;
+			int Tw = terData.heightmapResolution;
+			int Th = terData.heightmapResolution;
 			Vector3 Ts = terData.size;
 		
 			float ny = (x)* (Ts.z / Th) ;
@@ -148,8 +148,8 @@ public class RampBrush : MonoBehaviour {
 		int Py = 0;		
 		try { 
 			TerrainData terData = ter.terrainData;
-			int Tw = terData.heightmapWidth; //heightMapResolution
-			int Th = terData.heightmapHeight;//heightMapResolution
+			int Tw = terData.heightmapResolution; //heightMapResolution
+			int Th = terData.heightmapResolution;//heightMapResolution
 			Vector3 Ts = terData.size; //x and z and height of terrain
 			
 			if (VERBOSE) Debug.Log("terrainData heightmapHeight/heightmapWidth:" + Tw + " " + Tw);
@@ -308,8 +308,8 @@ public class RampBrush : MonoBehaviour {
 		int Py = 0;		
 		try { 
 			TerrainData terData = ter.terrainData;
-			int Tw = terData.heightmapWidth; //heightMapResolution in pixels
-			int Th = terData.heightmapHeight;//heightMapResolution in pixels
+			int Tw = terData.heightmapResolution; //heightMapResolution in pixels
+			int Th = terData.heightmapResolution;//heightMapResolution in pixels
 			Vector3 Ts = terData.size; //x and z and height of terrain
 			
 			if (VERBOSE) Debug.Log("terrainData heightmapHeight/heightmapWidth:" + Tw + " " + Tw);

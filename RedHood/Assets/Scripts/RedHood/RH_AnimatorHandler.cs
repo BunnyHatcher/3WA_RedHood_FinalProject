@@ -21,6 +21,7 @@ public class RH_AnimatorHandler : MonoBehaviour
     // Booleans
     public bool _isRunning;
     public bool _isTargeting;
+    public bool _isNearLootable;
 
     private void Awake()
     {
@@ -92,7 +93,7 @@ public class RH_AnimatorHandler : MonoBehaviour
     {
         if (context.started)
         {
-            _animator.SetTrigger("DodgeTrigger");            
+            _animator.SetTrigger("DodgeTrigger");
             //Debug.Log("Dodge context started");
             //_animator.applyRootMotion = true /*_playerMovement._isInteracting*/;
         }
@@ -174,6 +175,21 @@ public class RH_AnimatorHandler : MonoBehaviour
         {
             _animator.SetTrigger("HeavyAttack");
             //Debug.Log("Heavy Attack is triggered");
+        }
+    }
+
+    #endregion
+
+    #region Miscellaneous
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            _animator.SetTrigger("LootTrigger");
+            _animator.SetBool("isInteracting", true);
+            Debug.Log("Interacting");
+
         }
     }
 
