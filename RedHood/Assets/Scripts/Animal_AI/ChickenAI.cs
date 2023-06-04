@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum AgentState
+{
+    IDLE,
+    WALKING,
+    EATING,
+}
+
 public class ChickenAI : MonoBehaviour
 {
+    #region DECLARATIONS
 
     public float _wanderRadius = 5f;
     public float _wanderTimer = 5f;
@@ -17,6 +25,10 @@ public class ChickenAI : MonoBehaviour
     private Animator _animator;
     private MoveAgent _moveAgent;
     private NavMeshAgent _agent;
+
+    private AgentState _currentState;
+
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -37,29 +49,97 @@ public class ChickenAI : MonoBehaviour
         // Update timer
         _timer += Time.deltaTime;
 
-        // when chicken has wandered long enough, it will pick a new target
-        if (_timer >= _wanderTimer)
+        //Initiate State Updates
+        OnStateUpdate();
+
+    }
+
+
+
+    //---------------------------| S T A T E  M A C H I N E S |----------------------
+
+    private void OnStateEnter()
+    {
+        switch (_currentState)
         {
-            _animator.SetBool("isWandering", true);
-
-            Vector3 wanderDirection = (Random.insideUnitSphere * _wanderSphereMultiplier) + transform.position;
-            
-            // We need to make sure the AI only walks to a point on the NavMesh
-            NavMeshHit navMeshHit; 
-            NavMesh.SamplePosition(wanderDirection, out navMeshHit, _walkDistance, NavMesh.AllAreas);
-            
-            // Send AI on their way
-            Vector3 destination = navMeshHit.position;
-            _agent.SetDestination(destination);
-
-            // Set timer back to 0 and reshuffle the wander timer
-            _timer = 0f;
-            _wanderTimer = Random.Range(0.5f, 5.0f);
-        }
-
-        else
-        {
-            _animator.SetBool("isEating", true);
+            case AgentState.IDLE:
+                break;
+            case AgentState.WALKING:
+                break;
+            case AgentState.EATING:
+                break;
+            default:
+                break;
         }
     }
+
+    private void OnStateUpdate()
+    {
+        switch (_currentState)
+        {
+            case AgentState.IDLE:
+                break;
+            case AgentState.WALKING:
+                break;
+            case AgentState.EATING:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void OnStateExit()
+    {
+        switch (_currentState)
+        {
+            case AgentState.IDLE:
+                break;
+            case AgentState.WALKING:
+                break;
+            case AgentState.EATING:
+                break;
+            default:
+                break;
+        }
+    }
+
+    //---------------------------| S T A T E  M A C H I N E  M E T H O D S |----------------------------------------------------------------------------------------------------------------------
+
+    public void TransitionToState(AgentState ToState)
+    {
+        OnStateExit();
+        _currentState = ToState;
+        OnStateEnter();
+
+    }
+
+    public void ChickenWanderMethod()
+
+     {// when chicken has wandered long enough, it will pick a new target
+         if (_timer >= _wanderTimer)
+            {
+                _animator.SetBool("isWandering", true);
+
+                Vector3 wanderDirection = (Random.insideUnitSphere * _wanderSphereMultiplier) + transform.position;
+
+                // We need to make sure the AI only walks to a point on the NavMesh
+                NavMeshHit navMeshHit;
+                NavMesh.SamplePosition(wanderDirection, out navMeshHit, _walkDistance, NavMesh.AllAreas);
+
+                // Send AI on their way
+                Vector3 destination = navMeshHit.position;
+                _agent.SetDestination(destination);
+
+                // Set timer back to 0 and reshuffle the wander timer
+                _timer = 0f;
+                _wanderTimer = Random.Range(0.5f, 5.0f);
+            }
+
+         else
+            {
+                _animator.SetBool("isEating", true);
+            }
+     }
+
+   
 }

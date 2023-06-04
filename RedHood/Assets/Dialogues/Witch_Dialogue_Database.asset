@@ -2493,13 +2493,18 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 'Camera(Closeup, speaker,1);
+        value: 'Camera(Test, speaker,2);
+
+          Camera (Test, listener, 2)@{{end}};
 
           Delay(5);
 
           {{default}};
 
-          AnimatorPlay(Question01,speaker)'
+          AnimatorPlay(Question01,speaker);
+
+          AudioWait(Male
+          Angry 04)'
         type: 0
         typeString: 
       conversationID: 10
@@ -3132,8 +3137,8 @@ MonoBehaviour:
         width: 160
         height: 30
     entryGroups: []
-    canvasScrollPosition: {x: 52.76779, y: 21.535713}
-    canvasZoom: 0.69999987
+    canvasScrollPosition: {x: 98.072914, y: 51.591835}
+    canvasZoom: 0.7899998
   syncInfo:
     syncActors: 0
     syncItems: 0
