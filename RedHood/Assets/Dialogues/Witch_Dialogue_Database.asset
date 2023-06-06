@@ -2562,7 +2562,7 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Sequence
-        value: 
+        value: Camera(Closeup, speaker,2);
         type: 0
         typeString: 
       conversationID: 10
@@ -2586,7 +2586,7 @@ MonoBehaviour:
           m_Calls: []
       canvasRect:
         serializedVersion: 2
-        x: 285.11807
+        x: 286.38388
         y: 144.05978
         width: 160
         height: 30

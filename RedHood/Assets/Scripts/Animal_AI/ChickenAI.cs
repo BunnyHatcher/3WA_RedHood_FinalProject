@@ -15,9 +15,12 @@ public class ChickenAI : MonoBehaviour
     #region DECLARATIONS
 
     public float _wanderRadius = 5f;
-    public float _wanderTimer = 5f;
     public float _wanderSphereMultiplier = 4f;
     public float _walkDistance = 4f;
+
+    public float _idleTimer = 5f;
+    public float _minIdleTime = 1f;
+    public float _maxIdleTime = 5f;
 
     private Transform _target; // the chicken's current target
     private float _timer; // the amount of time the chicken has been wandering
@@ -39,8 +42,10 @@ public class ChickenAI : MonoBehaviour
 
         // set chicken's starting position as its target
         _target = transform;
+        // ... and set IDLE as starting state
+        _currentState = AgentState.IDLE;
 
-        _wanderTimer = 3f;
+        _idleTimer = 3f;
     }
 
     // Update is called once per frame
@@ -63,10 +68,21 @@ public class ChickenAI : MonoBehaviour
         switch (_currentState)
         {
             case AgentState.IDLE:
+                _animator.SetBool("isIdling", true);
+                _agent.ResetPath();
+
+                Debug.Log("Entered IDLE state");
                 break;
+
             case AgentState.WALKING:
+                _animator.SetBool("isWandering", true);
+                ChickenWanderMethod();
+
+                Debug.Log("Entered WALKING state");
                 break;
+
             case AgentState.EATING:
+                _animator.SetBool("isEating", true);
                 break;
             default:
                 break;
@@ -78,11 +94,37 @@ public class ChickenAI : MonoBehaviour
         switch (_currentState)
         {
             case AgentState.IDLE:
+                // Update timer
+                _timer += Time.deltaTime;
+
+                // when chicken has idled long enough, it will pick a new target
+                if (_timer >= _idleTimer)
+                {
+                    //Wait for current animation to finish playing
+                    /*
+                    if (!_animator || _animator.GetCurrentAnimatorStateInfo(0).normalizedTime
+                    - Mathf.Floor(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime) > 0.99f)
+                    */
+                    //... then transition to the Walking State
+                    //{
+                        TransitionToState(AgentState.WALKING);
+                        _animator.SetBool("isIdling", false);
+                    //}                        
+                }
                 break;
+
             case AgentState.WALKING:
+                if (_agent.remainingDistance <= .25f) // distance left before reaching the point they were looking for
+                {
+                    _agent.ResetPath();
+                    TransitionToState(AgentState.IDLE);
+                    _animator.SetBool("isWalking", false);
+                }
                 break;
+
             case AgentState.EATING:
                 break;
+
             default:
                 break;
         }
@@ -93,17 +135,27 @@ public class ChickenAI : MonoBehaviour
         switch (_currentState)
         {
             case AgentState.IDLE:
+                // On exit, set timer back to 0 and reshuffle the wander timer
+                _timer = 0f;
+                _idleTimer = Random.Range(_minIdleTime, _maxIdleTime);
+                //...also exit Idling Animation State
+                _animator.SetBool("isIdling", false);
                 break;
+
             case AgentState.WALKING:
+                _animator.SetBool("isWalking", false);
                 break;
+
             case AgentState.EATING:
+                _animator.SetBool("isEating", false);
                 break;
+
             default:
                 break;
         }
     }
 
-    //---------------------------| S T A T E  M A C H I N E  M E T H O D S |----------------------------------------------------------------------------------------------------------------------
+    //---------------------------| M E T H O D S |----------------------------------------------------------------------------------------------------------------------
 
     public void TransitionToState(AgentState ToState)
     {
@@ -115,31 +167,28 @@ public class ChickenAI : MonoBehaviour
 
     public void ChickenWanderMethod()
 
-     {// when chicken has wandered long enough, it will pick a new target
-         if (_timer >= _wanderTimer)
-            {
-                _animator.SetBool("isWandering", true);
+     {
+          Vector3 wanderDirection = (Random.insideUnitSphere * _wanderSphereMultiplier) + transform.position;
 
-                Vector3 wanderDirection = (Random.insideUnitSphere * _wanderSphereMultiplier) + transform.position;
+          // We need to make sure the AI only walks to a point on the NavMesh
+          NavMeshHit navMeshHit;
+          NavMesh.SamplePosition(wanderDirection, out navMeshHit, _walkDistance, NavMesh.AllAreas);
 
-                // We need to make sure the AI only walks to a point on the NavMesh
-                NavMeshHit navMeshHit;
-                NavMesh.SamplePosition(wanderDirection, out navMeshHit, _walkDistance, NavMesh.AllAreas);
+          // Send AI on their way
+          Vector3 destination = navMeshHit.position;
+          _agent.SetDestination(destination);
+    }
 
-                // Send AI on their way
-                Vector3 destination = navMeshHit.position;
-                _agent.SetDestination(destination);
+    private void FinishAnimation()
+    {
+        //Wait for current animation to finish playing
+        if (!_animator || _animator.GetCurrentAnimatorStateInfo(0).normalizedTime
+        - Mathf.Floor(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime) > 0.99f);
 
-                // Set timer back to 0 and reshuffle the wander timer
-                _timer = 0f;
-                _wanderTimer = Random.Range(0.5f, 5.0f);
-            }
+    } 
 
-         else
-            {
-                _animator.SetBool("isEating", true);
-            }
-     }
+       
+
 
    
 }
