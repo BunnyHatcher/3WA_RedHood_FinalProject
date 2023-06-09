@@ -22,16 +22,16 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0.8666666666666667
+    m_Start: 0.18333333333333332
     m_ClipIn: 0
     m_Asset: {fileID: -2498992105004604931}
-    m_Duration: 4.833333333333334
+    m_Duration: 3.45
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6415773772101476103}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1.6
-    m_BlendOutDuration: 1.3166666666666673
+    m_BlendInDuration: 1.1333333333333333
+    m_BlendOutDuration: 1.1
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -94,13 +94,13 @@ MonoBehaviour:
     m_Start: 0
     m_ClipIn: 0
     m_Asset: {fileID: 7554382626509827102}
-    m_Duration: 2.466666666666667
+    m_Duration: 1.3166666666666667
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6415773772101476103}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
-    m_BlendOutDuration: 1.6
+    m_BlendOutDuration: 1.1333333333333333
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -160,15 +160,15 @@ MonoBehaviour:
     m_PreExtrapolationTime: 0
     m_DisplayName: StateDrivenCamera
   - m_Version: 1
-    m_Start: 4.383333333333334
+    m_Start: 2.533333333333333
     m_ClipIn: 0
     m_Asset: {fileID: -3644392210872932847}
-    m_Duration: 3.4333333333333327
+    m_Duration: 2.283333333333333
     m_TimeScale: 1
     m_ParentTrack: {fileID: -6415773772101476103}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
-    m_BlendInDuration: 1.3166666666666673
+    m_BlendInDuration: 1.1
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
