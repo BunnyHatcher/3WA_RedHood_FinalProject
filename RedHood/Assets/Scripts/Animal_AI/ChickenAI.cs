@@ -19,8 +19,8 @@ public class ChickenAI : MonoBehaviour
     public float _walkDistance = 4f;
 
     public float _idleTimer = 5f;
-    public float _minIdleTime = 1f;
-    public float _maxIdleTime = 5f;
+    public float _minIdleTime = 5f;
+    public float _maxIdleTime = 10f;
 
     private Transform _target; // the chicken's current target
     private float _timer; // the amount of time the chicken has been wandering
@@ -52,7 +52,7 @@ public class ChickenAI : MonoBehaviour
     void Update()
     {
         // Update timer
-        _timer += Time.deltaTime;
+        //_timer += Time.deltaTime;
 
         //Initiate State Updates
         OnStateUpdate();
@@ -118,7 +118,7 @@ public class ChickenAI : MonoBehaviour
                 {
                     _agent.ResetPath();
                     TransitionToState(AgentState.IDLE);
-                    _animator.SetBool("isWalking", false);
+                    _animator.SetBool("isWandering", false);
                 }
                 break;
 
