@@ -109,13 +109,13 @@ public class RH_AnimatorHandler : MonoBehaviour
             if (context.started && _playerMovement._weaponDrawn == false)
             {
                _animator.SetBool("InCombatStance", true);
-               Debug.Log("Weapon was drawn");
+               //Debug.Log("Weapon was drawn");
             }
             
             else if (context.started && _playerMovement._weaponDrawn == true)
             {             
                _animator.SetBool("InCombatStance", false);
-               Debug.Log("Weapon was sheathed");             
+               //Debug.Log("Weapon was sheathed");             
             }        
     }
 
