@@ -9,6 +9,7 @@ public class RH_ATTACKING : RH_BaseState
     private float clipLength;
     private float clipSpeed;
     private float _previousFrameTime;
+    [SerializeField] float _threshold = 0.5f;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -16,7 +17,7 @@ public class RH_ATTACKING : RH_BaseState
     {
 
         //_playerMovement._isAttacking = true;
-  
+
         timePassed = 0f;
 
         //Set WeaponDrawn bool to true if not yet true
@@ -31,10 +32,15 @@ public class RH_ATTACKING : RH_BaseState
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        float timePassed = animator.GetCurrentAnimatorStateInfo(2).normalizedTime * animator.GetCurrentAnimatorStateInfo(2).length;
 
-        if (animator.GetCurrentAnimatorStateInfo(2).normalizedTime > 1)
+        if (timePassed > animator.GetCurrentAnimatorStateInfo(2).length - _threshold && _animator.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
         {
-           //Debug.Log("Combo Ready");
+            animator.GetComponentInParent<RH_AnimatorHandler>().SetCombo(true);
+        }
+        else
+        {
+            animator.GetComponentInParent<RH_AnimatorHandler>().SetCombo(false);
         }
 
 
@@ -94,7 +100,6 @@ public class RH_ATTACKING : RH_BaseState
 
         if (normalizedTime < _playerMovement._comboAttackTime) { return; }
 
-        _animator.SetBool("CanSwitchCombo", true);
 
 
     }

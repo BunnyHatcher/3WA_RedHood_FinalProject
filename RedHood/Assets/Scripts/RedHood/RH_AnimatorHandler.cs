@@ -11,6 +11,7 @@ public class RH_AnimatorHandler : MonoBehaviour
     RH_PhysicsHandler _physicsHandler;
     RH_PlayerMovement _playerMovement;
     Targeter _targeter;
+
     //Target _target;
 
     int horizontal;
@@ -22,6 +23,7 @@ public class RH_AnimatorHandler : MonoBehaviour
     public bool _isRunning;
     public bool _isTargeting;
     public bool _isNearLootable;
+    private bool _canSwitchCombo;
 
     private void Awake()
     {
@@ -158,13 +160,17 @@ public class RH_AnimatorHandler : MonoBehaviour
      
     }
 
-
+    public void SetCombo(bool value)
+    {
+        _canSwitchCombo = value;
+    }
 
     public void OnLightAttack(InputAction.CallbackContext context)
     {
         if (context.started)
         {
-            _animator.SetTrigger("LightAttack");
+            if (_canSwitchCombo || !_animator.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
+                _animator.SetTrigger("LightAttack");
             //Debug.Log("Light Attack is triggered");
         }       
     }
@@ -173,7 +179,8 @@ public class RH_AnimatorHandler : MonoBehaviour
     {
         if (context.started)
         {
-            _animator.SetTrigger("HeavyAttack");
+            if (_canSwitchCombo || !_animator.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
+                _animator.SetTrigger("HeavyAttack");
             //Debug.Log("Heavy Attack is triggered");
         }
     }

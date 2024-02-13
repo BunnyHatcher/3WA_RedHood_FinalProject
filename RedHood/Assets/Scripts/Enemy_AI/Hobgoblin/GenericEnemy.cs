@@ -46,6 +46,7 @@ public class GenericEnemy : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
 
         playerIsNear = false;
+        brain.PushState(Idle, OnIdleEnter, OnIdleExit);
     }
 
     // Update is called once per frame
