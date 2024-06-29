@@ -10,6 +10,7 @@ public class GenericEnemy : MonoBehaviour
     private AIStateMachine brain;
     private Animator animator;
     [SerializeField]
+    //protected AnimateAgent _enemyAnimations;
     private TMP_Text stateNote;
     private NavMeshAgent navAgent;
     private GameObject player;
@@ -33,6 +34,9 @@ public class GenericEnemy : MonoBehaviour
     protected float _suspicionTime = 3f;
     // Attack
     public float stoppingDistance = 1f;
+    public EnemyAttackAction[] _enemyAttacks;
+    public EnemyAttackAction _currentAttack;
+    public float _currentRecoveryTime = 0;
     #endregion
 
 
@@ -139,12 +143,17 @@ public class GenericEnemy : MonoBehaviour
     // ATTACK STATE
     void OnEnterAttack()
     {
-        navAgent.ResetPath();
         stateNote.text = "Attack";
+        navAgent.ResetPath();
     }
     void Attack()
     {
-        
+        if (isPerformingAction)
+            return;
+        //distanceFromTarget = Vector3.Distance(player.transform.position, transform.position);
+        HandleCurrentAction();
+        //AttackTarget();
+        HandleRecoveryTimer();
     }
 
     #endregion
@@ -153,6 +162,90 @@ public class GenericEnemy : MonoBehaviour
 
 
     #region Methods
+
+    private void AttackTarget()
+    {
+        if (isPerformingAction)
+            return;
+
+        if (_currentAttack == null)
+        {
+            GetNewAttack();
+        }
+        else
+        {
+            isPerformingAction = true;
+            _currentRecoveryTime = _currentAttack._recoveryTime; // _currentAttack = EnemyAttackAction
+            //_enemyAnimations.PlayTargetAnimation(_currentAttack._actionAnimation, true); ADD LATER
+            _currentAttack = null;
+        }
+    }
+
+    private void GetNewAttack()
+    {
+        Vector3 targetsDirection = player.transform.position - transform.position;
+        float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);
+        distanceFromTarget = Vector3.Distance(transform.position, player.transform.position);
+
+        int maxScore = 0;
+
+        for (int i = 0; i < _enemyAttacks.Length; i++)
+        {
+            EnemyAttackAction enemyAttackAction = _enemyAttacks[i];
+
+            if (distanceFromTarget <= enemyAttackAction.maxAttackDistance
+                && distanceFromTarget >= enemyAttackAction.minAttackDistance)
+            {
+                if (viewableAngle <= enemyAttackAction.maxAttackAngle
+                    && viewableAngle >= enemyAttackAction.minAttackAngle)
+                {
+                    maxScore += enemyAttackAction._attackScore;
+                }
+            }
+        }
+
+        int randomValue = Random.Range(0, maxScore);
+        int temporaryScore = 0;
+
+        for (int i = 0; i < _enemyAttacks.Length; i++)
+        {
+            EnemyAttackAction enemyAttackAction = _enemyAttacks[i];
+
+            if (distanceFromTarget <= enemyAttackAction.maxAttackDistance
+                && distanceFromTarget >= enemyAttackAction.minAttackDistance)
+            {
+                if (viewableAngle <= enemyAttackAction.maxAttackAngle
+                    && viewableAngle >= enemyAttackAction.minAttackAngle)
+                {
+                    if (_currentAttack != null)
+                        return;
+
+                    temporaryScore += enemyAttackAction._attackScore;
+
+                    if (temporaryScore > randomValue)
+                    {
+                        _currentAttack = enemyAttackAction;
+                    }
+
+                }
+            }
+        }
+
+
+    }
+    private void HandleCurrentAction()
+    {
+        distanceFromTarget = Vector3.Distance(player.transform.position, transform.position);
+        if (distanceFromTarget > stoppingDistance)
+        {
+            brain.PopState();
+            brain.PushState(Chase, OnChaseEnter, OnChaseExit);
+        }
+        else if (distanceFromTarget <= stoppingDistance)
+        {
+            AttackTarget();
+        }
+    }
     public void HandleMoveToTarget()
     {
         Vector3 targetDirection = player.transform.position - transform.position;
@@ -184,7 +277,21 @@ public class GenericEnemy : MonoBehaviour
         navAgent.transform.localPosition = Vector3.zero;
         navAgent.transform.localRotation = Quaternion.identity;
     }
+    private void HandleRecoveryTimer()
+    {
+        if (_currentRecoveryTime > 0)
+        {
+            _currentRecoveryTime -= Time.deltaTime;
+        }
 
+        if (isPerformingAction)
+        {
+            if (_currentRecoveryTime <= 0)
+            {
+                isPerformingAction = false;
+            }
+        }
+    }
     public void HandleRotateTowardsTarget()
     {
         // Rotate manually
